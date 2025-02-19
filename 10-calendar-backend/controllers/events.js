@@ -1,11 +1,8 @@
 const { response } = require("express");
 const Evento = require("../models/Evento");
 
-const getEvento =async (req, res = response) => {
-
-  const eventos = await Evento.find()
-                              .populate('user', 'name');
-
+const getEvento = async (req, res = response) => {
+  const eventos = await Evento.find().populate("user", "name");
 
   res.json({
     ok: true,
@@ -13,12 +10,11 @@ const getEvento =async (req, res = response) => {
   });
 };
 
-
 const crearEvento = async (req, res = response) => {
   const evento = new Evento(req.body);
 
   try {
-    evento.user= req.uid;
+    evento.user = req.uid;
     const eventoGuardado = await evento.save();
 
     res.json({
@@ -33,9 +29,6 @@ const crearEvento = async (req, res = response) => {
     });
   }
 };
-
-
-
 
 const actualizarEvento = async (req, res = response) => {
   const eventoId = req.params.id;
@@ -82,8 +75,7 @@ const actualizarEvento = async (req, res = response) => {
   }
 };
 
-
-const eliminarEvento = async(req, res = response) => {
+const eliminarEvento = async (req, res = response) => {
   const eventoId = req.params.id;
   const uid = req.uid;
 
@@ -109,10 +101,7 @@ const eliminarEvento = async(req, res = response) => {
     //   user: uid,
     // };
 
-    await Evento.findByIdAndDelete(
-      eventoId,
-      
-    );
+    await Evento.findByIdAndDelete(eventoId);
 
     res.json({
       ok: true,
