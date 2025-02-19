@@ -2,16 +2,18 @@ const mongoose = require("mongoose");
 
 const dbConection = async () => {
   try {
-    console.log(process.env.DB_CNN);
+    console.log("Intentando conectar a MongoDB...");
+    console.log("URI de conexión:", process.env.DB_CNN);
+
     await mongoose.connect(process.env.DB_CNN, {
       useNewUrlParser: true,
-      // useUnifiedTopology: true,
-      // useCreateIndex: true
+      useUnifiedTopology: true, // ✅ Activado
     });
-    console.log("se inicio correctamente");
+
+    console.log("✅ Conexión a MongoDB exitosa");
   } catch (error) {
-    console.log(error);
-    throw new Error("error al iniciar BD", error);
+    console.error("❌ Error al conectar a MongoDB:", error.message);
+    throw new Error("Error al iniciar BD"); // ✅ Corrección
   }
 };
 
