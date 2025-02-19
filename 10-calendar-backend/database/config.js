@@ -10,7 +10,7 @@ const dbConection = async () => {
     console.log("se inicio correctamente");
   } catch (error) {
     console.log(error);
-    throw new Error("error al iniciar BD");
+    throw new Error("error al iniciar BD", error);
   }
 };
 
